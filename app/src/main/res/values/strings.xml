@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MyTest</string>
     <string name="title_activity_main_result">MainActivityResult</string>
-</resources>
+            <string-array name="names">
+            <item>Java</item>
+            <item>Android</item>
+            <item>Windows</item>
+        </string-array>
+    </resources>
