@@ -12,6 +12,7 @@ public class MainActivityQuestion extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main_question);
         button3 = (Button) findViewById(R.id.button);
         // вещаем на кнопку слушатель

@@ -1,56 +1,52 @@
 package ru.myfirstapp.mytest;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivityTest extends Activity{
-    final String LOG_TAG = "myLogs";
+public class MainActivityTest extends AppCompatActivity {
+    String[] tests;
+    ArrayAdapter<String> adapter;
     ListView listView;
-    String[] names;
     private Button button5;
-    int perehod;
+    int select;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_test);
-        button5 = (Button) findViewById(R.id.button);
 
+        button5 = (Button) findViewById(R.id.button5);
         listView = findViewById(R.id.ListView);
-                listView.setChoiceMode(listView.CHOICE_MODE_SINGLE);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.names,
-                android.R.layout.simple_list_item_single_choice);
+        tests = new String[]{"Java", "Android", "Windows"};
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, tests);
         listView.setAdapter(adapter);
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//              int position, long id) {
-//                Log.d(LOG_TAG, "itemClick position = " + position + " , id = " + id);
-//            }
-//        });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Клик № " + position, Toast.LENGTH_SHORT).show();
-                perehod =   position;
+            public void onItemClick (AdapterView<?> parent, View itemClicked, int position, long id) {
+                Toast.makeText(getApplicationContext(), ((TextView) itemClicked).getText(), Toast.LENGTH_SHORT).show();
+
+                select =   position;
 //                Intent intent = new Intent(MainActivityTest.this, MainActivityQuestion.class);
 //                startActivity(intent);
             }
         });
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(MainActivityTest.this, MainActivityQuestion.class);
-                intent.putExtra("perehod",perehod);
+                intent.putExtra("position",select);
                 startActivity(intent);
             }
         });
